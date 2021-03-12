@@ -60,32 +60,106 @@ Q: Possiamo scrivere tutto in maniera ricorsiva? \
 R: Sì! Ci sono dei linguaggi (funzionali) che non hanno nemmeno i costrutti
 iterativi come il while o for.
 
-Esempio: la moltiplicazione $n$ per $m$ non è altro che la somma di
-$n$ $m$ volte, ovvero
+Esempio: supponiamo di avere a che fare con un linguaggio
+semplicissimo, che ci permette solo di esprimere il numero 0 e il
+successore di un numero tramite una funzione.
 
-$$\text{molt}(n, 0) = 0$$ \
-$$\text{molt}(n, m) = n + \text{molt}(n, m - 1)$$
+$$zero = 0$$ \
+$$s(n) = 1 + n $$
 
-La cui codifica è immediata:
+A questo punto, possiamo definirci i numeri naturali!
 
-```cpp
-int molt(n, m) {
-    if (m == 0) return 0;
-    return n + molt(n, m - 1);
-}
-```
+$$uno = s(zero)$$ \
+$$due = s(uno)$$
 
-Ma ciò vale anche per la somma! Che cos'è la somma tra $n$ ed $m$ se
-non l'aggiunta di un'unità $m$ volte ad $n$!
+e così via...
+
+Assumendo ora di aver codificato i numeri naturali che ci servono, che
+per comodità rimpiazziamo con il loro simbolo, riusciamo a codificare
+operazione relativamente complesse come somme, moltiplicazioni, if e
+altro?
+
+Se ci pensiamo bene la somma di $n$ con $m$ non è altro che il
+successore di $n$, $m$ volte!
 
 $$\text{somma}(n, 0) = n$$ \
-$$\text{somma}(n, m) = 1 + \text{somma}(n, m - 1)$$
+$$\text{somma}(n, m) = s(\text{somma}(n, m - 1)) = 1 + \text{somma}(n, m - 1)$$
 
-EX: Proviamo ad implementare la sequenza di fibonacci.
-$$\text{fib}(0) = \text{fib}(1) = 1$$ \
-$$\text{fib}(n + 1) ) = \text{fib}(n) + \text{fib}(n - 1)$$
+Ma ciò vale anche per la moltiplicazione! La moltiplicazione $n$ per
+$m$ non è altro che la somma di $n$ $m$ volte, ovvero
+
+$$\text{molt}(n, 0) = 0$$ \
+$$\text{molt}(n, m) = \text{somma}(n, \text{molt}(n, m - 1))$$
 
 Q: Vantaggi/svantaggi della ricorsione? \
 R: Semplifica molto la scrittura di alcuni problemi ma complica notevolmente
 quella di altri! In più a volte risulta meno efficiente e più complicata
 da capire.
+
+EX: Proviamo ad implementare la sequenza di fibonacci.
+$$\text{fib}(0) = \text{fib}(1) = 1$$ \
+$$\text{fib}(n + 1) ) = \text{fib}(n) + \text{fib}(n - 1)$$
+
+EX: Implementazione dell'algoritmo di bubble sort per ordinamento di
+array. Il bubble sort ordina una sequenza scambiando il valore delle
+due posizioni se esse non rispettano l'ordinamento.
+
+```cpp
+#include <iostream>
+
+void stampa(int X[], int n) {
+  for (int i = 0; i < n; i++) {
+    std::cout << X[i] << " ";
+  }
+  std::cout << std::endl;
+}
+
+void swap(int X[], int i, int j) {
+  int tmp = X[i];
+  X[i] = X[j];
+  X[j] = tmp;
+}
+
+void bubble_sort(int X[], int n) {
+  if (n == 1) return;
+
+  for (int i = 0; i < n - 1; i++) {
+    if (X[i] > X[i + 1])
+      swap(X, i, i+1);
+  }
+
+  bubble_sort(X, n - 1);
+}
+
+int main() {
+    int A[] = {1,3,4,2};
+
+    stampa(A, 4);
+    bubble_sort(A, 4);
+    stampa(A, 4);
+
+    return 0;
+}
+```
+
+EX: Torri di Hanoi.
+
+```cpp
+#include <iostream>
+
+// n dischi, sorgente, destinazione, piolo temporaneo
+// nota: il disco n è il più grosso, 1 è il più piccolo
+void hanoi(int n, char A, char B, char C) {
+  if (n <= 0) return;
+
+  hanoi(n - 1, A, C, B);
+  std::cout << "Muovo " << n << " dal piolo " << A << " al piolo " << B << std::endl;
+  hanoi(n - 1, C, B, A);
+}
+
+int main() {
+    hanoi(3, 'a', 'b', 'c');
+
+    return 0;
+}
+```
