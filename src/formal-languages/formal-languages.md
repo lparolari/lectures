@@ -110,6 +110,13 @@ dove
 - $q_0$: stato iniziale
 - $F \subseteq Q$ insieme stati finali
 
+Dall'alfabeto $\Sigma$ possiamo costruire
+
+$$\Sigma^* = \{ a_1 \cdots a_n : n \geq 0, a_i \in \Sigma \}$$
+
+ovvero l'insieme di tutte le stringhe a partire dall'alfabeto
+$\Sigma$.
+
 **Notazione**: p, q, r denotano stati; P, Q, R, S denotano insiemi di
 stati; a, b denotano simboli di $\Sigma$; x, y, z, u, v, w denotano
 stringhe.
