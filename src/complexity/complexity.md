@@ -144,4 +144,55 @@ dedurre che
 
 ## Complessità computazionale
 
-TODO
+Numero di operazioni di un algoritmo è legato alla dimensione dei dati
+di input. Se così non fosse il costo dell'algoritmo sarebbe una
+costante.
+
+Possiamo allora definire il costo di un algoritmo in funziuone
+dell'input (in particolare, della dimensione dell'input) $T(N)$.
+Questa funzione viene denominata "complessità dell'algoritmo", essa
+indica la relazione tra il numero di operazioni di un programma e la
+dimensione $N$ dei dati di input.
+
+E' facile quindi capire che a parità $N$, un algoritmo che impiega
+meno operazioni per risolvere un problema è migliore di un altro.
+
+ESEMPIO: algoritmo che somma gli elementi di un array.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    // assumiamo che questi siano gli input dell'algoritmo
+    // e che ci possano essere dati anche da fuori
+
+    int N = 10;
+    std::vector<int> A = { 15, 2, 4, 56, 3, 11, 12, 90, 56, 45 };
+
+    int somma = 0;
+
+    for (int i = 0; i < N; i++) {
+        somma += A[i];
+    }
+
+    std::cout << somma << std::endl;
+}
+```
+
+Ora calcoliamo la sua $T(N)$.
+
+$T(N) = 1 + 1 + N + N + N + 1 = 3 + 3N$
+
+Quindi otteniamo una retta con una certa pendenza.
+
+Andando ad approssimare possiamo dire che l'algoritmo opera in $O(N)$,
+ovvero l'ordine del polinomio che rappresenta la sua complessità non
+supera mai $N$! Questo vale anche nel caso di costanti: $3N > N$, ma
+la notazione $O$ nasconde queste costanti.
+
+ESEMPIO.
+
+- algoritmo che calcola $x^5$
+- algoritmo che calcola $x^n$
+- algoritmo che calcola $x^n$ ma con il metodo dei resti
