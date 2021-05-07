@@ -196,3 +196,32 @@ ESEMPIO.
 - algoritmo che calcola $x^5$
 - algoritmo che calcola $x^n$
 - algoritmo che calcola $x^n$ ma con il metodo dei resti
+
+## Classe di complessità
+
+Siano $f(n)$ e $g(n)$ due funzioni. Si dice che $f(n)$ è di ordine di
+grandezza $g(n)$ e si scrive $O(g(n))$, se esiste una costante $C > 0$
+tale che $\forall x \in \mathbb{N} : f(x) < C * g(x)$.
+
+E possiamo quindi affermare che un algoritmo con costo $T(N)$ ha
+complessità proporzionale a $N^2$, ovvero $O(N^2)$.
+
+Classi di complessità:
+
+- Costante $O(1)$. Stesso num di operazioni indipendentemente
+  dall'input;
+
+- Logaritmica $O(\log N)$. Esempio: ricerca binaria;
+
+- Sublineare $O(n^c)$ con $0 < c < 1$. Esempio: Ricerca in un albero
+  con k figli.
+
+- Lineare $O(N)$. Esempio: ricerca sequenziale, lettura, stampa,
+  verifica di numero primo, ...;
+
+- Linearitmico $O(N \log N)$. Esempio: ordinamento comparativo;
+
+- Polinomiale $O(N^K). Esempio: prodotto matriciale;
+
+- Esponenziale $(2^N). Esempio: generare tutte le possibili stringhe
+  di un alfabeto;
